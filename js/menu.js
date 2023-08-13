@@ -37,29 +37,6 @@ class Menu {
     this.lastOperationTime = null; // 在构造函数中添加此行，用于存储上次操作的时间
     this.operationInterval = 5; // 操作间隔，根据实际情况调整
   }
-
-  // adjustTheme() {
-  //   if (this.selectedOptions[2] === 'novato') return 0.87;
-  //   if (this.selectedOptions[2] === 'corredor') return 0.935;
-  //   return 1;
-  // }
-
-  // startRace(player, road, opponents, director) {
-  //   const roadParam = road;
-  //   const zero = 0;
-  //   drivers.forEach((driver) => opponents.push(new Opponent(
-  //     driver.power * this.adjustDifficulty(),
-  //     startPosition(tracks[this.selectedOptions[zero]].trackSize, driver.position),
-  //     driver.trackSide, 'opponents', driver.name, driver.carColor,
-  //   )));
-
-  //   opponents.forEach((opponentNumber) => opponentNumber.create());
-  //   opponents.splice(this.selectedOptions[1], opponents.length);
-  //   roadParam.trackName = this.selectedOptions[zero];
-  //   roadParam.create();
-  //   player.create(this, tracks[this.selectedOptions[zero]].trackSize);
-  //   director.create(road, this.selectedOptions[0]);
-  // }
   
   update() {
     const {
@@ -148,6 +125,8 @@ class Menu {
     const centerY = canvasHeight / 2;
     const scaleX = canvasWidth / 640;
     const scaleY = canvasHeight / 360;
+    render.renderingContext.clearRect(0, 0, canvasWidth, canvasHeight);
+
   
     this.animations.forEach((item) => item.render(render));
     render.drawText('#000053', 'CabinGPT Demo', centerX, canvasHeight * 0.11, 3 * scaleX, 'RaceSport');
@@ -156,12 +135,9 @@ class Menu {
       if (this.menuTitle.pos >= 12) this.menuTitle.direction = -1;
       if (this.menuTitle.pos <= -12) this.menuTitle.direction = 1;
       this.menuTitle.pos += (this.menuTitle.direction / 2);
-      if (window.navigator.maxTouchPoints) {
-        render.drawText('black', '歡迎體驗新世代的智慧座艙系統', centerX, centerY + this.menuTitle.pos * scaleY, 2 * scaleX);
-      } else {
-        render.drawText('black', '歡迎體驗新世代的智慧座艙系統', centerX, centerY + this.menuTitle.pos * scaleY, 2 * scaleX);
-        render.drawText('black', 'Press Enter', centerX, centerY + 50 * scaleY, 1 * scaleX);
-      }
+      
+      render.drawText('black', '歡迎體驗新世代的智慧座艙系統', centerX, centerY + this.menuTitle.pos * scaleY, 2 * scaleX);
+      render.drawText('black', 'Press Enter', centerX, centerY + 50 * scaleY, 1 * scaleX);
     }
   
     if (this.showMenu) {
@@ -180,46 +156,25 @@ class Menu {
       render.drawText('#050B1A', phrase, centerX, centerY + (this.menuTitle.pos) * scaleY, 1.6 * scaleX, 'MicrosoftYaheiBold');
       render.drawText('#FFFAF4', highText, centerX, centerY + 45 * scaleY, 1.6 * scaleX);
   
-      if (window.navigator.maxTouchPoints) {
-        const buttonStartX = canvasWidth * 0.22;
-        const buttonGap = canvasWidth * 0.062;
-        const buttonY = canvasHeight * 0.86;
-        const buttonTextY = canvasHeight * 0.95;
-        const buttonRadius = 15 * scaleX;
+      const arrowKeys = new Sprite();
+      arrowKeys.image = resource.get('arrowKeys');
+      arrowKeys.name = 'mnArrowKeys';
       
-        Menu.drawButtons(render, buttonStartX, buttonY, buttonRadius, 'U');
-        Menu.drawButtons(render, buttonStartX + buttonGap, buttonY, buttonRadius, 'D');
-        Menu.drawButtons(render, buttonStartX + buttonGap * 2, buttonY, buttonRadius, 'L');
-        Menu.drawButtons(render, buttonStartX + buttonGap * 3, buttonY, buttonRadius, 'R');
-        
-        render.drawText('black', 'Navegar', buttonStartX, buttonTextY, 1.3 * scaleX, 'MicrosoftYahei', 'left');
+      const enterKey = new Sprite();
+      enterKey.image = resource.get('enterKey');
+      enterKey.name = 'mnEnterKey';
       
-        const okButtonX = canvasWidth * 0.65;
-        Menu.drawButtons(render, okButtonX, buttonY, buttonRadius * 1.2, 'OK');
-        
-        const confirmTextX = canvasWidth * 0.81;
-        render.drawText('black', 'Confirmar', confirmTextX, buttonTextY, 1.3 * scaleX, 'MicrosoftYahei', 'right');
-      } else {
-        const arrowKeys = new Sprite();
-        arrowKeys.image = resource.get('arrowKeys');
-        arrowKeys.name = 'mnArrowKeys';
+      const textX = canvasWidth * 0.92;
+      const textY1 = canvasHeight * 0.88;
+      const textY2 = canvasHeight * 0.95;
+      const buttonY = canvasHeight * 0.85;
+      const buttonTextY = canvasHeight * 0.93;
+      const imageSize = 18 * scaleX;
       
-        const enterKey = new Sprite();
-        enterKey.image = resource.get('enterKey');
-        enterKey.name = 'mnEnterKey';
-      
-        const textX = canvasWidth * 0.92;
-        const textY1 = canvasHeight * 0.88;
-        const textY2 = canvasHeight * 0.95;
-        const buttonY = canvasHeight * 0.85;
-        const buttonTextY = canvasHeight * 0.93;
-        const imageSize = 18 * scaleX;
-      
-        render.drawText('black', '控制', textX, textY1, 1.3 * scaleX, 'MicrosoftYahei', 'right');
-        render.renderingContext.drawImage(arrowKeys.image, textX + 5 * scaleX, buttonY, imageSize, imageSize);
-        render.drawText('black', '確認', textX, textY2, 1.3 * scaleX, 'MicrosoftYahei', 'right');
-        render.renderingContext.drawImage(enterKey.image, textX + 7 * scaleX, buttonTextY, imageSize - 5 * scaleX, imageSize);
-      }      
+      render.drawText('black', '控制', textX, textY1, 1.3 * scaleX, 'MicrosoftYahei', 'right');
+      render.renderingContext.drawImage(arrowKeys.image, textX + 5 * scaleX, buttonY, imageSize, imageSize);
+      render.drawText('black', '確認', textX, textY2, 1.3 * scaleX, 'MicrosoftYahei', 'right');
+      render.renderingContext.drawImage(enterKey.image, textX + 7 * scaleX, buttonTextY, imageSize - 5 * scaleX, imageSize);
   
     }
   }  

@@ -6,30 +6,6 @@
   margin: 0;
 }
 
-@font-face {
-  font-family: Arrows;
-  src: url(../other/arrows.ttf);
-}
-
-@font-face {
-  font-family: OutriderCond;
-  src: url(../other/outriderCond.ttf);
-}
-
-@font-face {
-  font-family: OutriderCondBold;
-  src: url(../other/outriderCondBold.ttf);
-}
-
-@font-face {
-  font-family: ZhanKuKuHei-1;
-  src: url(../other/ZhanKuKuHei-1.ttf);
-}
-
-@font-face {
-  font-family: jf-openhuninn-2.0;
-  src: url(../other/jf-openhuninn-2.0.ttf);
-}
 
 @font-face {
   font-family: MicrosoftYahei;
@@ -40,10 +16,6 @@
   src: url(../other/MicrosoftYaheiBold.ttf);
 }
 
-@font-face {
-  font-family: RaceSport;
-  src: url(../other/RaceSport.ttf);
-}
 
 html, body {
   background: #000000;
