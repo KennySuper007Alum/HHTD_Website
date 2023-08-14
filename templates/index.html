@@ -10,11 +10,14 @@
     />
     <meta property="og:description" content="CabinGPT" />
     <meta property="og:image" content="https://i.imgur.com/XMPnLHm.png" />
-    <meta property="”og:type”" content="”game“" />
-    <link rel="icon" href="./favicon.png" />
+    <meta property="og:type" content="game" />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="./css/main.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
     <title>CabinGPT</title>
@@ -29,36 +32,27 @@
           name="p"
         ></button>
         <button id="fullScreenBtn" class="interfaceBtn" name="fullscreenbtn">
-          <img class="img100" src="images/sprites/other/fullscreen.png" />
+          <img
+            class="img100"
+            src="{{ url_for('static', filename='images/sprites/other/fullscreen.png') }}"
+          />
         </button>
         <span id="mute" class="mute hidden"></span>
       </ul>
 
-      <div id="touchControls">
-        <div class="leftControls">
-          <button class="controlButtons" type="button" name="arrowup">U</button>
-          <button class="controlButtons" type="button" name="arrowdown">
-            D
-          </button>
-        </div>
-        <div class="rightControls">
-          <button class="controlButtons" type="button" name="enter">OK</button>
-          <button class="controlButtons" type="button" name="arrowleft">
-            L
-          </button>
-          <button class="controlButtons" type="button" name="arrowright">
-            R
-          </button>
-        </div>
-      </div>
-
       <video id="space" width="100%" height="100%" class="hidden">
-        <source src="video/space.mp4" type="video/mp4" />
+        <source
+          src="{{ url_for('static', filename='video/space.mp4') }}"
+          type="video/mp4"
+        />
         Your browser does not support the video tag.
       </video>
 
       <video id="streetview" width="100%" height="100%" class="hidden">
-        <source src="video/Prototype_City.mp4" type="video/mp4" />
+        <source
+          src="{{ url_for('static', filename='video/Prototype_City.mp4') }}"
+          type="video/mp4"
+        />
         Your browser does not support the video tag.
       </video>
 
@@ -66,16 +60,26 @@
     </div>
 
     <audio id="menuMusic">
-      <source src="music/future_music.mp3" />
+      <source
+        src="{{ url_for('static', filename='music/future_music.mp3') }}"
+      />
     </audio>
 
     <audio id="blueSky">
-      <source src="music/blueSky.mp3" />
+      <source src="{{ url_for('static', filename='music/blueSky.mp3') }}" />
     </audio>
 
-    <script src="./dist/bundle.js"></script>
-
-    <script src="./js/stats.js"></script>
-    <script type="module" src="./js/main.js"></script>
+    <script src="{{ url_for('static', filename='js/stats.js') }}"></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/main.js') }}"
+    ></script>
+    <script>
+      var arrowKeysURL =
+        "{{ url_for('static', filename='images/sprites/other/arrowKeys.png') }}";
+      var enterKeyURL =
+        "{{ url_for('static', filename='images/sprites/other/enterKey.png') }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/bundle.js') }}"></script>
   </body>
 </html>

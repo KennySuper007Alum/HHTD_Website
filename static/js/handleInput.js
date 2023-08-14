@@ -70,7 +70,7 @@ class HandleInput {
   }
 
   static toggleFullScreen() {
-    const gameContainer = document.querySelector('.container');
+    const gameContainer = document.documentElement;
     if (!document.fullscreenElement) {
       gameContainer.requestFullscreen().catch((err) => {
         alert(`Error, can't enable full-screen ${err.message}`);
